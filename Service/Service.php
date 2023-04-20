@@ -88,19 +88,21 @@ error_log(print_r(Config::getCurrentConfig(), true));
 # ------------------------------------------------------------------------------------------ main
 
 $mqttConnectionSettings = (new ConnectionSettings)
-    ->setUsername(Config::getMqttUsername())
-    ->setPassword(Config::getMqttPassword())
     ->setKeepAliveInterval(Config::getMqttKeepAlive());
+
+if (Config::getMqttUsername()) {
+    $mqttConnectionSettings->setUsername(Config::getMqttUsername());
+}
+
+if (Config::getMqttPassword()) {
+    $mqttConnectionSettings->setPassword(Config::getMqttPassword());
+}
 
 try {
     $mqttClient = new MqttClient(Config::getMqttHost(), Config::getMqttPort(), SERVICE_NAME);
 } catch (\Exception $exception) {
     trigger_error('Cannot create mqtt object: ' . $exception->getMessage());
 }
-
-pcntl_signal(SIGINT, function (int $signal, $info) use ($mqttClient) {
-    $mqttClient->interrupt();
-});
 
 $stored_frequencies         = array();
 $stored_frequencies_count   = 0;
