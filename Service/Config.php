@@ -3,7 +3,7 @@ namespace Maschinengeist\Services\Utilities\Mains\Netzfrequenzinfo;
 class Config {
 
     public static function getVersion() : string {
-        return '1.0.0';
+        return '1.0.1';
     }
 
     public static function getMqttHost() : string {
