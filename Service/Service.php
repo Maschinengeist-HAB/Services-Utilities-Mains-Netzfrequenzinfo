@@ -88,9 +88,15 @@ error_log(print_r(Config::getCurrentConfig(), true));
 # ------------------------------------------------------------------------------------------ main
 
 $mqttConnectionSettings = (new ConnectionSettings)
-    ->setUsername(Config::getMqttUsername())
-    ->setPassword(Config::getMqttPassword())
     ->setKeepAliveInterval(Config::getMqttKeepAlive());
+
+if (Config::getMqttUsername()) {
+    $mqttConnectionSettings->setUsername(Config::getMqttUsername());
+}
+
+if (Config::getMqttPassword()) {
+    $mqttConnectionSettings->setPassword(Config::getMqttPassword());
+}
 
 try {
     $mqttClient = new MqttClient(Config::getMqttHost(), Config::getMqttPort(), SERVICE_NAME);
