@@ -11,7 +11,7 @@ class Config {
     }
 
     public static function getMqttPort() : int {
-        return $_ENV['MQTT_PORT'] ?? 1883;
+        return (int) ($_ENV['MQTT_PORT'] ?? 1883);
     }
 
     public static function getMqttUsername() : string {
@@ -39,11 +39,11 @@ class Config {
     }
 
     public static function getSleepTime() : int {
-        return (int) $_ENV['SERVICE_SLEEP_TIME'] ?? 5;
+        return (int) ($_ENV['SERVICE_SLEEP_TIME'] ?? 5);
     }
 
     public static function getMaxCollectedFrequencies() : int {
-        return (int) $_ENV['MAX_COLLECTED_FREQUENCIES'] ?? 20;
+        return (int) ($_ENV['MAX_COLLECTED_FREQUENCIES'] ?? 20);
     }
 
     public static function getUnderFrequencyHz() : float {
@@ -51,7 +51,7 @@ class Config {
     }
 
     public static function getMaxConnectionErrorCount() : int {
-        return (int) $_ENV['MAX_CONNECTION_ERROR_COUNT'] ?? 10;
+        return (int) ($_ENV['MAX_CONNECTION_ERROR_COUNT'] ?? 10);
     }
 
     public static function getCurrentConfig(): array {
@@ -71,6 +71,7 @@ class Config {
                 'max collected values before transmission' => self::getMaxCollectedFrequencies(),
                 'under frequency threshold in Hz' => self::getUnderFrequencyHz(),
                 'max api connection error threshold before aborting' => self::getMaxConnectionErrorCount(),
+                'sleep time' => self::getSleepTime(),
             ),
         );
     }
