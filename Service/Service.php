@@ -98,10 +98,6 @@ try {
     trigger_error('Cannot create mqtt object: ' . $exception->getMessage());
 }
 
-pcntl_signal(SIGINT, function (int $signal, $info) use ($mqttClient) {
-    $mqttClient->interrupt();
-});
-
 $stored_frequencies         = array();
 $stored_frequencies_count   = 0;
 $last_las                   = false;

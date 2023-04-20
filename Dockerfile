@@ -4,7 +4,6 @@ ENV MQTT_HOST=message-broker \
     MQTT_PORT=1883 \
     TZ=Europe/Berlin
 
-RUN docker-php-ext-configure pcntl --enable-pcntl  && docker-php-ext-install -j$(nproc) pcntl
 
 LABEL org.opencontainers.image.source="https://github.com/Maschinengeist-HAB/Services-Utilities-Mains-Netzfrequenzinfo"
 LABEL org.opencontainers.image.description="Gateway from the Netzfrequenz.info european power grid frequency to MQTT"
